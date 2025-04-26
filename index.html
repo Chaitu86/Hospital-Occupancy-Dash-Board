@@ -1,92 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hospital Daily Report</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      padding: 20px;
-    }
-
-    .form-container {
-      max-width: 600px;
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      margin: 0 auto;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      margin-top: 12px;
-      font-weight: bold;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 6px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-
-    button {
-      margin-top: 20px;
-      background: #1a73e8;
-      color: white;
-      padding: 12px;
-      width: 100%;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #155ab6;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Hospital Occupancy Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f0f2f5;
+        }
+        input, textarea, button {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #output {
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="form-container">
-    <h2>🏥 Daily Occupancy Report</h2>
+<h2>🏥 Hospital Occupancy Dashboard</h2>
 
-    <label for="reportDate">Date</label>
-    <input type="date" id="reportDate" />
+<label for="date">Date:</label>
+<input type="text" id="date" placeholder="e.g., 19/04/2025">
 
-    <label for="totalOccupancy">Total Occupancy</label>
-    <input type="number" id="totalOccupancy" placeholder="e.g. 513" />
+<label for="gw">GW:</label>
+<input type="text" id="gw">
 
-    <label for="icu">ICU</label>
-    <input type="number" id="icu" />
+<label for="er">ER:</label>
+<input type="text" id="er">
 
-    <label for="hdu">HDU</label>
-    <input type="number" id="hdu" />
+<label for="floor2">2nd floor:</label>
+<input type="text" id="floor2">
 
-    <label for="daycare">Daycare</label>
-    <input type="number" id="daycare" />
+<label for="ts">T/S:</label>
+<input type="text" id="ts">
 
-    <label for="admissions">Admissions (Cash/Credit)</label>
-    <input type="text" id="admissions" placeholder="e.g. Cash - 64, Credit - 51" />
+<label for="floor7">7th floor:</label>
+<input type="text" id="floor7">
 
-    <label for="discharges">Discharges</label>
-    <input type="number" id="discharges" />
+<label for="floor7ms">7th MS:</label>
+<input type="text" id="floor7ms">
 
-    <label for="mtd">MTD Admissions (Cash/Credit)</label>
-    <input type="text" id="mtd" placeholder="e.g. Cash - 1134, Credit - 801" />
+<label for="floor8">8th floor:</label>
+<input type="text" id="floor8">
 
-    <button onclick="alert('Form submitted!')">Submit</button>
-  </div>
+<label for="floor8dot">8th floor Dot:</label>
+<input type="text" id="floor8dot">
+
+<label for="floor9">9th floor:</label>
+<input type="text" id="floor9">
+
+<label for="floor10">10th floor:</label>
+<input type="text" id="floor10">
+
+<label for="floor11">11th floor:</label>
+<input type="text" id="floor11">
+
+<label for="icu">ICU:</label>
+<input type="text" id="icu">
+
+<label for="hdu">HDU:</label>
+<input type="text" id="hdu">
+
+<label for="total">Total Occupancy:</label>
+<input type="text" id="total">
+
+<label for="daycare">Daycare:</label>
+<input type="text" id="daycare">
+
+<label for="cardiology">Cardiology:</label>
+<input type="text" id="cardiology">
+
+<label for="admissions">Admissions (Cash/Credit):</label>
+<input type="text" id="admissions" placeholder="e.g., 64/51">
+
+<label for="totalAdmissions">Total Admissions:</label>
+<input type="text" id="totalAdmissions">
+
+<label for="discharges">Discharges:</label>
+<input type="text" id="discharges">
+
+<label for="daycareAdmissions">Daycare Admissions:</label>
+<input type="text" id="daycareAdmissions">
+
+<label for="mtd">MTD Admissions (Cash/Credit/Total/Daycare):</label>
+<input type="text" id="mtd" placeholder="e.g., 1134/801/2047/1504">
+
+<br><br>
+
+<button onclick="generateMessage()">Generate Message</button>
+<button onclick="copyMessage()">Copy Message</button>
+
+<div id="output"></div>
+
+<script>
+function generateMessage() {
+    const message = `
+GOOD MORNING SIR,
+CURRENT OCCUPANCY ${document.getElementById('date').value}
+
+GW                 : ${document.getElementById('gw').value}
+ER                   : ${document.getElementById('er').value}
+2nd floor        : ${document.getElementById('floor2').value}
+T/S                  : ${document.getElementById('ts').value}
+7th floor         : ${document.getElementById('floor7').value}
+7th MS            : ${document.getElementById('floor7ms').value}
+8th floor.          : ${document.getElementById('floor8').value}
+8th Floor Dot.   : ${document.getElementById('floor8dot').value}
+9th floor            : ${document.getElementById('floor9').value}
+10th Floor.         : ${document.getElementById('floor10').value}
+11th Floor.          : ${document.getElementById('floor11').value}
+ICU                    : ${document.getElementById('icu').value}
+HDU 	            : ${document.getElementById('hdu').value}
+
+TOTAL 	: ${document.getElementById('total').value}
+Daycare    - ${document.getElementById('daycare').value}
+Cardiology - ${document.getElementById('cardiology').value}
+
+Admissions on ${document.getElementById('date').value}
+
+Cash - ${document.getElementById('admissions').value.split('/')[0]}
+Credit - ${document.getElementById('admissions').value.split('/')[1]}
+
+*Total - ${document.getElementById('totalAdmissions').value}
+*Discharges - ${document.getElementById('discharges').value}
+*Daycare - ${document.getElementById('daycareAdmissions').value}
+
+MTD ADMISSIONS
+
+Cash - ${document.getElementById('mtd').value.split('/')[0]}
+Credit - ${document.getElementById('mtd').value.split('/')[1]}
+
+Total - *${document.getElementById('mtd').value.split('/')[2]}
+Daycare -*${document.getElementById('mtd').value.split('/')[3]}
+    `.trim();
+
+    document.getElementById('output').innerText = message;
+}
+
+function copyMessage() {
+    const text = document.getElementById('output').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        alert('Message copied to clipboard!');
+    });
+}
+</script>
 
 </body>
 </html>
