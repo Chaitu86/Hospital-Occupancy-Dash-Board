@@ -1,44 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Hospital Occupancy Dashboard</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            background-color: #f0f2f5;
-        }
-        input, textarea, button {
-            width: 100%;
-            margin-top: 10px;
-            padding: 10px;
-            font-size: 16px;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        #output {
-            margin-top: 20px;
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            white-space: pre-wrap;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Hospital Occupancy Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f0f2f5;
+    }
+    input, textarea, button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #output {
+      margin-top: 20px;
+      background: #e6ffee;
+      padding: 20px;
+      border-radius: 8px;
+      white-space: pre-wrap;
+      font-size: 16px;
+      border: 1px solid #b3ffcc;
+    }
+    h2 {
+      color: #333;
+    }
+  </style>
 </head>
 <body>
 
 <h2>🏥 Hospital Occupancy Dashboard</h2>
 
 <label for="date">Date:</label>
-<input type="text" id="date" placeholder="e.g., 19/04/2025">
+<input type="date" id="date">
 
 <label for="gw">GW:</label>
 <input type="text" id="gw">
@@ -112,54 +120,57 @@
 
 <script>
 function generateMessage() {
-    const message = `
+  const date = new Date(document.getElementById('date').value);
+  const formattedDate = date.toLocaleDateString('en-GB');
+
+  const message = `
 GOOD MORNING SIR,
-CURRENT OCCUPANCY ${document.getElementById('date').value}
+CURRENT OCCUPANCY as on ${formattedDate}
 
-GW                 : ${document.getElementById('gw').value}
-ER                   : ${document.getElementById('er').value}
-2nd floor        : ${document.getElementById('floor2').value}
-T/S                  : ${document.getElementById('ts').value}
-7th floor         : ${document.getElementById('floor7').value}
-7th MS            : ${document.getElementById('floor7ms').value}
-8th floor.          : ${document.getElementById('floor8').value}
-8th Floor Dot.   : ${document.getElementById('floor8dot').value}
-9th floor            : ${document.getElementById('floor9').value}
-10th Floor.         : ${document.getElementById('floor10').value}
-11th Floor.          : ${document.getElementById('floor11').value}
-ICU                    : ${document.getElementById('icu').value}
-HDU 	            : ${document.getElementById('hdu').value}
+🛏️ GW                 : ${document.getElementById('gw').value}
+🛏️ ER                   : ${document.getElementById('er').value}
+🛏️ 2nd floor        : ${document.getElementById('floor2').value}
+🛏️ T/S                  : ${document.getElementById('ts').value}
+🛏️ 7th floor         : ${document.getElementById('floor7').value}
+🛏️ 7th MS            : ${document.getElementById('floor7ms').value}
+🛏️ 8th floor.          : ${document.getElementById('floor8').value}
+🛏️ 8th Floor Dot.   : ${document.getElementById('floor8dot').value}
+🛏️ 9th floor            : ${document.getElementById('floor9').value}
+🛏️ 10th Floor.         : ${document.getElementById('floor10').value}
+🛏️ 11th Floor.          : ${document.getElementById('floor11').value}
+🛏️ ICU                    : ${document.getElementById('icu').value}
+🛏️ HDU                  : ${document.getElementById('hdu').value}
 
-TOTAL 	: ${document.getElementById('total').value}
+TOTAL Occupancy 	: ${document.getElementById('total').value}
 Daycare    - ${document.getElementById('daycare').value}
 Cardiology - ${document.getElementById('cardiology').value}
 
-Admissions on ${document.getElementById('date').value}
+Admissions on ${formattedDate}
 
-Cash - ${document.getElementById('admissions').value.split('/')[0]}
-Credit - ${document.getElementById('admissions').value.split('/')[1]}
+💰 Cash - ${document.getElementById('admissions').value.split('/')[0]}
+➡️💰 Credit - ${document.getElementById('admissions').value.split('/')[1]}
 
-*Total - ${document.getElementById('totalAdmissions').value}
+*Total Admissions - ${document.getElementById('totalAdmissions').value}
 *Discharges - ${document.getElementById('discharges').value}
-*Daycare - ${document.getElementById('daycareAdmissions').value}
+*Daycare Admissions - ${document.getElementById('daycareAdmissions').value}
 
 MTD ADMISSIONS
 
-Cash - ${document.getElementById('mtd').value.split('/')[0]}
-Credit - ${document.getElementById('mtd').value.split('/')[1]}
+💰 Cash - ${document.getElementById('mtd').value.split('/')[0]}
+➡️💰 Credit - ${document.getElementById('mtd').value.split('/')[1]}
 
 Total - *${document.getElementById('mtd').value.split('/')[2]}
 Daycare -*${document.getElementById('mtd').value.split('/')[3]}
-    `.trim();
+  `.trim();
 
-    document.getElementById('output').innerText = message;
+  document.getElementById('output').innerText = message;
 }
 
 function copyMessage() {
-    const text = document.getElementById('output').innerText;
-    navigator.clipboard.writeText(text).then(() => {
-        alert('Message copied to clipboard!');
-    });
+  const text = document.getElementById('output').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Message copied to clipboard!');
+  });
 }
 </script>
 
