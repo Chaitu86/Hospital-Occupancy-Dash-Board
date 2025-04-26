@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hospital Daily Report</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 20px;
+    }
+
+    .form-container {
+      max-width: 600px;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      margin: 0 auto;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      margin-top: 20px;
+      background: #1a73e8;
+      color: white;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #155ab6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>🏥 Daily Occupancy Report</h2>
+
+    <label for="reportDate">Date</label>
+    <input type="date" id="reportDate" />
+
+    <label for="totalOccupancy">Total Occupancy</label>
+    <input type="number" id="totalOccupancy" placeholder="e.g. 513" />
+
+    <label for="icu">ICU</label>
+    <input type="number" id="icu" />
+
+    <label for="hdu">HDU</label>
+    <input type="number" id="hdu" />
+
+    <label for="daycare">Daycare</label>
+    <input type="number" id="daycare" />
+
+    <label for="admissions">Admissions (Cash/Credit)</label>
+    <input type="text" id="admissions" placeholder="e.g. Cash - 64, Credit - 51" />
+
+    <label for="discharges">Discharges</label>
+    <input type="number" id="discharges" />
+
+    <label for="mtd">MTD Admissions (Cash/Credit)</label>
+    <input type="text" id="mtd" placeholder="e.g. Cash - 1134, Credit - 801" />
+
+    <button onclick="alert('Form submitted!')">Submit</button>
+  </div>
+
+</body>
+</html>
